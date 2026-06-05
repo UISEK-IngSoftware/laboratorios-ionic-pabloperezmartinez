@@ -2,9 +2,8 @@
 
 ## Información del Estudiante
 
-- **Nombre:** [Tu nombre completo aquí]
-- **Carrera:** [Tu carrera]
-- **Fecha de inicio:** [Fecha]
+- **Nombre:** Pablo Pérez Martínez
+- **Carrera:** Ingeniería de Software
 
 ---
 
