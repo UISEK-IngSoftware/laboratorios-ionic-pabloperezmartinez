@@ -20,7 +20,7 @@ const Tab3: React.FC = () => {
           <IonCard className="card">
             <img src="https://avatars.githubusercontent.com/u/48026030?v=4" alt="Avatar"/>
             <IonCardHeader>
-              <IonCardTitle>Pablo Pérez Martínez</IonCardTitle>
+              <IonCardTitle color="primary">Pablo Pérez Martínez</IonCardTitle>
               <IonCardSubtitle>pabloperezmartinez</IonCardSubtitle>
             </IonCardHeader>
             <IonCardContent>
