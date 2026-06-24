@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonContent, IonHeader, IonList, IonPage, IonTitle, IonToolbar, useIonViewWillEnter } from '@ionic/react';
+import { IonContent, IonHeader, IonList, IonPage, IonText, IonTitle, IonToolbar, useIonViewWillEnter } from '@ionic/react';
 import { fetchRepositories } from '../services/GithubService';
 import { Repository } from '../interfaces/Repository';
 import RepoItem from '../components/RepoItem';
@@ -9,12 +9,15 @@ import LoadingSpinner from '../components/LoadingSpinner';
 const Tab1: React.FC = () => {
   const [repos, setRepos] = React.useState<Repository[]>([]);
   const [loading, setLoading] = React.useState<boolean>(false);
+  const [errorMsg, setErrorMsg] = React.useState<string>("");
 
   const loadRepos = async () => {
     setLoading(true);
-    const reposData = await fetchRepositories();
-    setRepos(reposData);
-    setLoading(false);
+    fetchRepositories().then((reposData) => {
+      setRepos(reposData);
+    }).catch((error) => {
+      setErrorMsg("Error al cargar repositorios. " + error);
+    }).finally(() => setLoading(false))
   }
 
   useIonViewWillEnter(() => {
@@ -28,7 +31,7 @@ const Tab1: React.FC = () => {
           <IonTitle>Repositorios</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
+      <IonContent fullscreen className="ion-padding">
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">Repositorios</IonTitle>
@@ -40,10 +43,10 @@ const Tab1: React.FC = () => {
           ))}
         </IonList>
         {loading && <LoadingSpinner isOpen={loading} />}
-        {!loading && repos.length === 0 && (
-          <div>
-            <p>No se encontraron repositorios.</p>
-          </div>
+        {errorMsg !== "" && (
+          <IonText color="danger">
+            {errorMsg}
+          </IonText>
         )}
       </IonContent>
     </IonPage>
